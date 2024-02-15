@@ -5,7 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CleverTap</title>
+
+    <!-- src="https://d2r1yp2w7bby2u.cloudfront.net/js/a.js" -->
     <script type="text/javascript">
+      //   importScripts(
+      //     "https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js"
+      //   );
+
       var clevertap = {
         event: [],
         profile: [],
@@ -45,6 +51,14 @@
           clevertap.raiseNotificationClicked();
         });
       };
+      clevertap.notifications.push({
+        titleText: "Would you like to receive Push Notifications?",
+        bodyText:
+          "We promise to only send you relevant content and give you updates on your transactions",
+        okButtonText: "Sign me up!",
+        rejectButtonText: "No thanks",
+        okButtonColor: "#f28046",
+      });
     </script>
   </head>
   <body>
