@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "clevertap-web-sdk": "^1.6.10"
+  }
+}
