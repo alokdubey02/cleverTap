@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>CleverTap</title>
     <script type="text/javascript">
       var clevertap = {
         event: [],
@@ -14,10 +14,9 @@
         notifications: [],
         privacy: [],
       };
-      // replace with the CLEVERTAP_ACCOUNT_ID with the actual ACCOUNT ID value from your Dashboard -> Settings page
       clevertap.account.push({ id: "TEST-RRZ-K79-7W7Z" });
-      clevertap.privacy.push({ optOut: false }); //set the flag to true, if the user of the device opts out of sharing their data
-      clevertap.privacy.push({ useIP: true }); //set the flag to true, if the user agrees to share their IP data
+      clevertap.privacy.push({ optOut: false });
+      clevertap.privacy.push({ useIP: false });
       (function () {
         var wzrk = document.createElement("script");
         wzrk.type = "text/javascript";
@@ -33,9 +32,19 @@
           "Product Name": "CleverTap",
           Name: "Alok Kumar Dubey",
           Email: "alok.dubey22@spit.ac.in",
+          "MSG-push": true,
         };
         clevertap.event.push("Product viewed Event", eventProperties);
       })();
+      clevertap.notificationCallback = function (msg) {
+        //raise the notification viewed and clicked events in the callback
+        clevertap.raiseNotificationViewed();
+        console.log(JSON.stringify(msg)); //your custom rendering implementation here
+        var $button = jQuery("<button></button>"); //element on whose click you want to raise the notification clicked event
+        $button.click(function () {
+          clevertap.raiseNotificationClicked();
+        });
+      };
     </script>
   </head>
   <body>
@@ -47,6 +56,12 @@
       document.getElementById("script").addEventListener("click", function () {
         alert("Button clicked!");
       });
+    </script>
+    <script>
+      var notificationObj;
+      window.parent.clevertap.popupCallback = (notificationData) => {
+        notificationObj = notificationData;
+      };
     </script>
   </body>
 </html>
