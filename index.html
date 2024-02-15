@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CleverTap</title>
 
-    <!-- src="https://d2r1yp2w7bby2u.cloudfront.net/js/a.js" -->
     <script type="text/javascript">
-      //   importScripts(
-      //     "https://s3-eu-west-1.amazonaws.com/static.wizrocket.com/js/sw_webpush.js"
-      //   );
-
       var clevertap = {
         event: [],
         profile: [],
@@ -42,40 +37,26 @@
         };
         clevertap.event.push("Product viewed Event", eventProperties);
       })();
-      clevertap.notificationCallback = function (msg) {
-        //raise the notification viewed and clicked events in the callback
-        clevertap.raiseNotificationViewed();
-        console.log(JSON.stringify(msg)); //your custom rendering implementation here
-        var $button = jQuery("<button></button>"); //element on whose click you want to raise the notification clicked event
-        $button.click(function () {
-          clevertap.raiseNotificationClicked();
-        });
-      };
+
       clevertap.notifications.push({
         titleText: "Would you like to receive Push Notifications?",
         bodyText:
           "We promise to only send you relevant content and give you updates on your transactions",
         okButtonText: "Sign me up!",
         rejectButtonText: "No thanks",
-        okButtonColor: "#f28046",
+        okButtonColor: "#F28046",
+        askAgainTimeInSeconds: 5,
+        serviceWorkerPath: "/gg.js",
       });
     </script>
   </head>
   <body>
     <h1>CleverTap</h1>
     <button id="script">Button</button>
-    <!-- <div id="script"></div> -->
-
     <script>
       document.getElementById("script").addEventListener("click", function () {
         alert("Button clicked!");
       });
-    </script>
-    <script>
-      var notificationObj;
-      window.parent.clevertap.popupCallback = (notificationData) => {
-        notificationObj = notificationData;
-      };
     </script>
   </body>
 </html>
